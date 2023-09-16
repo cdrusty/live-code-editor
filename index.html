@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PixelCode - An Online Code Editor</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="top">
+      <button id="run-button" onclick="run()"><i class="fa-solid fa-play"></i> Run</button>
+    </div>
+
+    <div class="left">
+
+      <label><i class="fa-brands fa-html5"></i> HTML</label>
+      <textarea id="html-code" onkeyup="run()"></textarea>
+
+      <label><i class="fa-brands fa-css3-alt"></i> CSS</label>
+      <textarea id="css-code" onkeyup="run()"></textarea>
+
+      <label><i class="fa-brands fa-js"></i> JavaScript</label>
+      <textarea id="js-code"></textarea>
+
+    </div>
+
+    <div class="right">
+      <label><i class="fa-solid fa-play"></i> Output</label>
+      <iframe id="output"></iframe>
+      <div id="error-console"></div>
+    </div>
+  </div>
+
+  <script>
+    function run() {
+      const htmlCode = document.getElementById('html-code').value;
+      const cssCode = document.getElementById('css-code').value;
+      const jsCode = document.getElementById('js-code').value;
+      const output = document.getElementById('output');
+      const errorConsole = document.getElementById('error-console');
+
+      output.contentDocument.body.innerHTML = htmlCode + "<style>" + cssCode + "</style>";
+
+      // Clear previous errors
+      errorConsole.innerHTML = '';
+
+      try {
+        output.contentWindow.eval(jsCode);
+      } catch (error) {
+        // Display the error below the output
+        errorConsole.innerHTML = `<div class="error">${error.message}</div>`;
+        console.error(error); // Also log the error to the browser console
+      }
+    }
+  </script>
+</body>
+
+</html>
