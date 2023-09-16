@@ -85,10 +85,8 @@ label {
   right: 20px;  
   align-items: center;
   position: absolute;
-  top: 10px; /* Adjust this value as needed for vertical positioning */
-  left: 50%;
+  top: 10px; 
   transform: translateX(-50%);
   width: fit-content;
 }
-
 
